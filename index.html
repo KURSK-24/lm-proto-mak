@@ -19,7 +19,7 @@ header span{color:var(--muted);font-size:13px}
 h1{font-size:34px;line-height:1.1;font-weight:400;margin:18px 0 10px}
 .lead{color:#4a4238}
 .deck{display:flex;gap:10px;margin:22px 0 4px;justify-content:center}
-.deck .back{width:31%;aspect-ratio:2/3;border-radius:12px;background:var(--accent);border:6px solid var(--card);box-shadow:0 6px 18px rgba(60,40,10,.15);display:grid;place-items:center;color:var(--gold);font:28px Georgia,serif}
+.deck .back{background-size:cover!important;background-position:center!important;width:31%;aspect-ratio:2/3;border-radius:12px;background:var(--accent);border:6px solid var(--card);box-shadow:0 6px 18px rgba(60,40,10,.15);display:grid;place-items:center;color:var(--gold);font:28px Georgia,serif}
 .deck .back:nth-child(1){transform:rotate(-5deg)}.deck .back:nth-child(3){transform:rotate(5deg)}
 .btn{display:block;width:100%;border:0;border-radius:14px;padding:17px 18px;font-size:17px;font-weight:600;cursor:pointer;background:var(--accent);color:#fff;text-align:center;text-decoration:none;margin-top:18px}
 .btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line);font-weight:500}
@@ -30,7 +30,11 @@ h1{font-size:34px;line-height:1.1;font-weight:400;margin:18px 0 10px}
 .bar i{display:block;height:100%;background:var(--gold);width:0;transition:width .3s}
 .qn{color:var(--muted);font-size:13px;letter-spacing:.06em;text-transform:uppercase}
 .mak{margin:12px auto 16px;width:72%;aspect-ratio:2/3;border-radius:14px;overflow:hidden;border:6px solid var(--card);box-shadow:0 8px 24px rgba(60,40,10,.18);background:#e9dcc6}
-.mak svg{width:100%;height:100%;display:block}
+.mak img{width:100%;height:100%;object-fit:cover;display:block}
+.protonote{background:#fff3d6;border:1px dashed #c9a96a;border-radius:12px;padding:12px 14px;font-size:14px;color:#5c4718;margin-top:14px}
+.step{display:grid;grid-template-columns:30px 1fr;gap:10px;padding:8px 0}
+.step em{font-style:normal;width:30px;height:30px;border-radius:50%;background:#e6efe9;color:var(--accent);display:grid;place-items:center;font-weight:700}
+.free{display:inline-block;background:var(--accent);color:#fff;border-radius:6px;padding:1px 7px;font-size:12px;margin-left:4px}
 .q{font-size:24px;line-height:1.2;margin:0 0 16px;font-weight:400;text-align:center}
 .opt{display:block;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);color:var(--text);border-radius:14px;padding:14px 16px;font-size:16px;margin-bottom:10px;cursor:pointer}
 .opt:hover,.opt:focus-visible{border-color:var(--gold);outline:none}
@@ -58,9 +62,10 @@ footer{border-top:1px solid var(--line);margin-top:36px;padding-top:18px;color:v
   <section class="screen on" id="s0">
     <h1 class="serif">Три карты о тебе</h1>
     <p class="lead">Перед тобой три картинки. Здесь нет правильных ответов: важно только, что увидишь ты. Ответь первое, что придёт в голову, и получишь тему, которая сейчас в тебе громче всего</p>
-    <div class="deck"><div class="back">✦</div><div class="back">✦</div><div class="back">✦</div></div>
+    <div class="deck"><div class="back" style="background:url(img/door.jpg)"></div><div class="back" style="background:url(img/window.jpg)"></div><div class="back" style="background:url(img/fog.jpg)"></div></div>
     <button class="btn" onclick="start()">Открыть первую карту</button>
     <p class="note">3 карты · около минуты</p>
+    <div class="protonote"><b>Это прототип.</b> Вместо карт колоды Ирины здесь для примера картины Хаммерсхёя и Фридриха. В рабочей версии загружаются карты её колоды, и визуально всё может выглядеть совсем иначе</div>
   </section>
 
   <section class="screen" id="sq">
@@ -78,41 +83,45 @@ footer{border-top:1px solid var(--line);margin-top:36px;padding-top:18px;color:v
     <p id="rd"></p>
     <div class="box"><h3>Что увидела ты</h3><ul id="seen"></ul></div>
     <div class="box"><h3>Вопрос, который стоит задать себе</h3><p class="ask" id="ask"></p></div>
+    <div class="box"><h3>Как это работает</h3>
+      <p>Метафорическая карта ничего не предсказывает. Ты смотришь на картинку, а видишь в ней то, что уже есть внутри. Поэтому двое смотрят на одну дверь, и один видит выход, а другой ловушку</p>
+      <span class="tag">в рабочей версии: короткое видео или статья Ирины о том, как работают МАК</span>
+    </div>
     <div class="box"><h3>Если хочется копнуть глубже</h3>
-      <p>На консультации мы разбираем твой ответ по карте: почему ты увидела именно это и что за этим стоит в твоей жизни. Часто из одной картинки вырастает очень конкретный запрос</p>
+      <p>На консультации мы разбираем твои ответы по картам: почему ты увидела именно это и что за этим стоит в твоей жизни. Часто из одной картинки вырастает очень конкретный запрос</p>
+    </div>
+    <div class="box"><h3>Что дальше в боте</h3>
+      <div class="step"><em>1</em><div><b>Карта дня <span class="free">30 дней бесплатно</span></b><br>Каждое утро одна карта и вопрос к ней</div></div>
+      <div class="step"><em>2</em><div><b>Расклад Таро на твой вопрос</b><br>Задаёшь вопрос и получаешь расклад по методу Ирины. Недорого, по подписке</div></div>
+      <div class="step"><em>3</em><div><b>Личная консультация</b><br>Когда хочется разобраться глубже</div></div>
     </div>
     <a class="btn" href="#" onclick="return false">Разобрать мои карты с Ириной</a>
-    <span class="tag">в рабочей версии: кнопка ведёт к Ирине в личку, бот присылает разбор и ведёт к консультации</span>
+    <span class="tag">в рабочей версии: кнопка ведёт к Ирине в личку, бот выдаёт карту дня, расклады по подписке и зовёт на консультацию</span>
     <button class="btn ghost" onclick="show('s0')">Пройти ещё раз</button>
   </section>
 
-  <footer>Это прототип: картинки нарисованы для примера, тексты черновые. В рабочей версии карты, вопросы и толкования Ирина даёт по своему методу и своими словами</footer>
+  <footer>Это прототип: картины Хаммерсхёя и Фридриха (общественное достояние) взяты для примера, тексты черновые. В рабочей версии карты, вопросы и толкования Ирина даёт по своему методу и своими словами</footer>
 </div>
 
 <script>
-var SV={
-door:'<svg viewBox="0 0 200 300"><rect width="200" height="300" fill="#e9dcc6"/><rect x="104" y="60" width="66" height="170" fill="#f8e7b5"/><rect x="104" y="60" width="66" height="170" fill="none" stroke="#5a4a36" stroke-width="4"/><polygon points="170,60 190,48 190,242 170,230" fill="#8a6f4e"/><rect x="0" y="230" width="200" height="70" fill="#cdbb9d"/><circle cx="140" cy="128" r="9" fill="#2f2a24"/><path d="M131 140 h18 l4 50 h-8 l-2 40 h-8 l-2-40 h-8z" fill="#2f2a24"/><circle cx="52" cy="168" r="9" fill="#2f5d50"/><path d="M40 180 h24 l2 30 h-28z" fill="#2f5d50"/><rect x="28" y="206" width="52" height="8" fill="#5a4a36"/><rect x="32" y="214" width="5" height="18" fill="#5a4a36"/><rect x="72" y="214" width="5" height="18" fill="#5a4a36"/></svg>',
-road:'<svg viewBox="0 0 200 300"><rect width="200" height="300" fill="#dfe6df"/><circle cx="150" cy="70" r="22" fill="#f1d58a"/><path d="M0 170 Q60 150 100 160 T200 150 V300 H0z" fill="#9fb59c"/><path d="M95 300 L104 165 L112 165 L150 300z" fill="#e8dcc0"/><path d="M104 165 L60 120 M112 165 L160 118" stroke="#e8dcc0" stroke-width="6"/><circle cx="118" cy="214" r="8" fill="#2f2a24"/><path d="M110 225 h16 l3 34 h-6 l-1 26 h-8 l-1-26 h-6z" fill="#2f2a24"/><rect x="128" y="244" width="16" height="20" rx="2" fill="#b8893b"/></svg>',
-win:'<svg viewBox="0 0 200 300"><rect width="200" height="300" fill="#3b3a44"/><rect x="50" y="40" width="100" height="150" fill="#f6d9a0"/><path d="M100 40 v150 M50 115 h100" stroke="#3b3a44" stroke-width="5"/><rect x="0" y="232" width="200" height="68" fill="#2a2930"/><circle cx="100" cy="176" r="13" fill="#141318"/><path d="M80 192 h40 l8 50 h-56z" fill="#141318"/></svg>'
-};
 var Q=[
- {img:'door',t:'Кто из них может уйти в любой момент?',o:[['Тот, что стоит у двери','free'],['Тот, что сидит','stay'],['Оба могут','choice'],['Никто из них','duty']]},
- {img:'road',t:'Этот человек уходит от чего-то или идёт к чему-то?',o:[['Уходит от того, что надоело','free'],['Идёт к мечте','choice'],['Просто идёт, сам не знает куда','search'],['Он возвращается домой','stay']]},
- {img:'win',t:'Чего ждёт человек у окна?',o:[['Кого-то, кто должен прийти','duty'],['Знака, что пора действовать','search'],['Ничего, ему хорошо одному','stay'],['Решается выйти','free']]}
+ {img:'door.jpg',t:'Ты стоишь в этой комнате. Куда ты пойдёшь?',o:[['В самую дальнюю дверь','free'],['Останусь здесь, тут тихо','stay'],['Выберу одну, но не сразу','choice'],['Не знаю, двери одинаковые','search']]},
+ {img:'window.jpg',t:'Чего ждёт женщина у окна?',o:[['Кого-то, кто должен прийти','duty'],['Знака, что пора действовать','search'],['Ничего, ей хорошо одной','stay'],['Решается уйти','free']]},
+ {img:'fog.jpg',t:'Что видит этот человек перед собой?',o:[['Новый путь','choice'],['Туман и неизвестность','search'],['Всё, чего он добился','stay'],['Место, откуда пора уходить','free']]}
 ];
 var R={
- free:{h:'Тебе тесно',d:'В твоих ответах снова и снова звучит выход: дверь, дорога, решимость. Похоже, внутри уже есть ощущение, что где-то стало мало места. Это не значит, что нужно всё бросать. Это значит, что тебе важно понять, что именно держит',a:'Что я бы сделала, если бы точно знала, что имею право уйти?'},
- stay:{h:'Ты ищешь опору',d:'Ты чаще выбирала тех, кто остаётся, сидит, возвращается. Возможно, сейчас тебе важнее всего устойчивость и место, где можно выдохнуть. Это нормальная потребность, а не слабость',a:'Где в моей жизни сейчас есть место, в котором мне спокойно?'},
- duty:{h:'Ты держишь больше, чем говоришь',d:'В твоих ответах никто не уходит просто так: ждут, остаются, не могут. Так часто видит мир тот, кто привык отвечать за других. Стоит заметить, сколько из этого ты несёшь по выбору, а сколько по привычке',a:'Что из того, что я держу, на самом деле не моё?'},
- choice:{h:'Ты на пороге выбора',d:'Ты видишь, что могут оба и что дорога ведёт к мечте. Ты замечаешь возможности, и, похоже, один выбор уже зреет. Осталось понять, что мешает его сделать',a:'Какой выбор я уже сделала внутри, но ещё не сказала вслух?'},
- search:{h:'Ты ищешь свой знак',d:'Ты видишь людей, которые идут, не зная куда, или ждут сигнала. Похоже, сейчас тебе не хватает ясности, а не сил. Ясность часто приходит, когда вопрос сформулирован точно',a:'Какой знак мне нужен, чтобы я наконец разрешила себе начать?'}
+ free:{h:'Тебе тесно',d:'В твоих ответах снова и снова звучит выход: дальняя дверь, решимость, дорога прочь. Похоже, внутри уже есть ощущение, что где-то стало мало места. Это не значит, что нужно всё бросать. Это значит, что тебе важно понять, что именно держит',a:'Что я бы сделала, если бы точно знала, что имею право уйти?'},
+ stay:{h:'Ты ищешь опору',d:'Ты чаще выбирала остаться, побыть в тишине, оглянуться на сделанное. Возможно, сейчас тебе важнее всего устойчивость и место, где можно выдохнуть. Это нормальная потребность, а не слабость',a:'Где в моей жизни сейчас есть место, в котором мне спокойно?'},
+ duty:{h:'Ты держишь больше, чем говоришь',d:'В твоих ответах кто-то всё время ждёт других. Так часто видит мир тот, кто привык отвечать за других. Стоит заметить, сколько из этого ты несёшь по выбору, а сколько по привычке',a:'Что из того, что я держу, на самом деле не моё?'},
+ choice:{h:'Ты на пороге выбора',d:'Ты видишь новый путь и знаешь, что дверь выберешь сама. Ты замечаешь возможности, и, похоже, один выбор уже зреет. Осталось понять, что мешает его сделать',a:'Какой выбор я уже сделала внутри, но ещё не сказала вслух?'},
+ search:{h:'Ты ищешь свой знак',d:'Ты видишь туман, одинаковые двери и ждёшь знака. Похоже, сейчас тебе не хватает ясности, а не сил. Ясность часто приходит, когда вопрос сформулирован точно',a:'Какой знак мне нужен, чтобы я наконец разрешила себе начать?'}
 };
 var i=0,ans=[];
 function show(id){document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('on')});document.getElementById(id).classList.add('on');window.scrollTo(0,0)}
 function start(){i=0;ans=[];render();show('sq')}
-function render(){var q=Q[i];document.getElementById('qn').textContent='Карта '+(i+1)+' из '+Q.length;document.getElementById('pic').innerHTML=SV[q.img];document.getElementById('qt').textContent=q.t;document.getElementById('prog').style.width=(i/Q.length*100)+'%';var o=document.getElementById('opts');o.innerHTML='';q.o.forEach(function(x,k){var b=document.createElement('button');b.className='opt';b.textContent=x[0];b.onclick=function(){ans[i]=k;i++;if(i<Q.length)render();else result()};o.appendChild(b)})}
+function render(){var q=Q[i];document.getElementById('qn').textContent='Карта '+(i+1)+' из '+Q.length;document.getElementById('pic').innerHTML='<img src="img/'+q.img+'" alt="">';document.getElementById('qt').textContent=q.t;document.getElementById('prog').style.width=(i/Q.length*100)+'%';var o=document.getElementById('opts');o.innerHTML='';q.o.forEach(function(x,k){var b=document.createElement('button');b.className='opt';b.textContent=x[0];b.onclick=function(){ans[i]=k;i++;if(i<Q.length)render();else result()};o.appendChild(b)})}
 function prev(){if(i>0){i--;render()}else show('s0')}
-function result(){var c={};ans.forEach(function(k,n){var t=Q[n].o[k][1];c[t]=(c[t]||0)+1});var top=Q[0].o[ans[0]][1];for(var t in c)if(c[t]>c[top])top=t;var r=R[top];document.getElementById('rh').textContent=r.h;document.getElementById('rd').textContent=r.d;document.getElementById('ask').textContent='«'+r.a+'»';document.getElementById('seen').innerHTML=ans.map(function(k,n){return '<li>'+Q[n].t.replace('?','')+': <b>'+Q[n].o[k][0].toLowerCase()+'</b></li>'}).join('');show('sr')}
+function result(){var c={};ans.forEach(function(k,n){var t=Q[n].o[k][1];c[t]=(c[t]||0)+1});var top=Q[0].o[ans[0]][1];for(var t in c)if(c[t]>c[top])top=t;var r=R[top];document.getElementById('rh').textContent=r.h;document.getElementById('rd').textContent=r.d;document.getElementById('ask').textContent='«'+r.a+'»';document.getElementById('seen').innerHTML=ans.map(function(k,n){return '<li>'+Q[n].t.replace('?','').replace('Ты стоишь в этой комнате. ','')+': <b>'+Q[n].o[k][0].toLowerCase()+'</b></li>'}).join('');show('sr')}
 </script>
 </body>
 </html>
